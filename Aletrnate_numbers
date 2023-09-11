@@ -1,0 +1,45 @@
+import java.util.*;
+
+public class Solution {
+    public static int[] alternateNumbers(int []a) {
+        List<Integer> p = new ArrayList<Integer>();
+        List<Integer> n=new ArrayList<Integer>();
+        int o=a.length;
+        for(int i=0;i<o;i++){
+            if(a[i]>0){
+                p.add(a[i]);
+            }
+            else{
+                n.add(a[i]);
+            }
+        }
+        if(p.size() > n.size()){
+            for(int k=0;k<n.size();k++){
+                a[2*k]=p.get(k);
+                a[(2*k)+1]=n.get(k);
+            }
+            int index=n.size()*2;
+            for(int l=n.size();l<p.size();l++){
+                a[index]=p.get(l);
+                index++;
+                
+            }
+            
+        }
+        else{
+            for(int k=0;k<p.size();k++){
+                a[2*k]=p.get(k);
+                a[(2*k)+1]=n.get(k);
+            }
+            int index=p.size()*2;
+            for(int l=p.size();l<n.size();l++){
+                a[index]=n.get(l);
+                index++;
+                
+            }
+            
+        }
+        return a;
+        // Write your code here.
+    }
+}
