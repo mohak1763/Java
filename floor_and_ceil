@@ -1,0 +1,52 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static int forfloor(int n,int x,int[] arr){
+        Arrays.sort(arr);
+        int low=0;
+        int high=n-1;
+        int ans=-1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            // maybe an answer
+            if (arr[mid] <= x) {
+                ans = arr[mid];
+                //look for smaller index on the left
+                low = mid + 1;
+            } else {
+                high = mid - 1; // look on the right
+            }
+        }
+        return ans;
+    
+
+    }
+
+    public static int forceil(int n,int x,int[] arr){
+        Arrays.sort(arr);
+        int s=0;
+        int e=arr.length-1;
+        int ans=-1;
+        while(s<=e){
+            int mid=(s+e)/2;
+            if(arr[mid]>=x){
+                ans=arr[mid];
+                e=mid-1;
+            }
+            else{
+                s=mid+1;
+            }
+        }
+        return ans;
+
+    }
+    public static int ceilingInSortedArray(int n, int x, int[] arr) {
+        int a=forfloor(n,x,arr);
+        int b=forceil(n,x,arr);
+        System.out.print(a+" ");
+        return b;
+
+
+        // Write your code here.
+    }
+}
