@@ -1,0 +1,56 @@
+import java.util.ArrayList;
+
+public class Solution {
+
+    public static int merge(int arr[],int l,int r,int mid){
+        
+        ArrayList<Integer> a=new ArrayList<Integer>();
+        int left=l;
+        int right=mid+1;
+        int cnt=0;
+        while(left<=mid && right<=r){
+            if(arr[left]<=arr[right]){
+                a.add(arr[left]);
+                left++;
+            }
+            else{
+                a.add(arr[right]);
+                cnt+=(mid-left+1);
+                
+                right++;
+            }
+        }
+        while(left<=mid){
+            a.add(arr[left]);
+            left++;
+        }
+        while(right<=r){
+            a.add(arr[right]);
+            right++;
+        }
+        int size=a.size();
+        for(int i=l;i<=r;i++){
+            arr[i]=a.get(i-l);
+        }
+        return cnt;
+    }
+
+    public static int  mergeSort(int[] arr, int l, int r){
+        int cnt=0;
+        if(l>=r){
+            return cnt;
+        }
+        int mid=(l+r)/2;
+        cnt+=mergeSort(arr, l, mid);
+        cnt+=mergeSort(arr, mid+1, r);
+        cnt+=merge(arr,l,r,mid);
+        return cnt;
+        // Write your code here
+
+    }
+
+    public static int numberOfInversions(int []a, int n) {
+        return mergeSort(a, 0, n-1);
+        // Write your code here.
+    }
+}
