@@ -1,0 +1,53 @@
+import java.util.*;
+
+public class Solution 
+{
+    public static boolean isPossible(ArrayList<Integer> boards, int mid,int k){
+        int n=boards.size();
+        long last=0;
+        int p=1;
+        for(int i=0;i<n;i++){
+            if(mid<boards.get(i)){
+                return false;
+            }
+            if(boards.get(i)+last<=mid){
+                last+=boards.get(i);
+            }
+            else{
+                p++;
+                last=boards.get(i);
+            }
+
+
+        }
+        if(p>k){
+            return false;
+        }
+        return true;
+    }
+    public static int findLargestMinDistance(ArrayList<Integer> boards, int k)
+    {
+        int low=Collections.min(boards);
+        int high=0;
+        int n=boards.size();
+        for(int i=0;i<n;i++){
+            high+=boards.get(i);
+        }
+        int ans=-1;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(isPossible(boards,mid,k)){
+                ans=mid;
+                high=mid-1;
+
+            }
+            else{
+                low=mid+1;
+            }           
+
+        }
+        return ans;
+
+        //    Write your code here.
+    }
+}
