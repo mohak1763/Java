@@ -1,0 +1,54 @@
+import java.util.*;
+public class Solution {
+    public static boolean isPossible(ArrayList<Integer> arr, int mid,int k){
+        long student=0;
+        int n=arr.size();
+        int s=1;
+        for(int i=0;i<n;i++){
+            if(arr.get(i)>mid){
+                return false;
+            }
+            if(student+arr.get(i)<=mid){
+                student+=arr.get(i);
+
+            }
+            else{
+                s++;
+                student=arr.get(i);
+
+            }
+
+        }
+        if(s>k){
+            return false;
+        }
+        return true;
+
+
+    }
+    public static int findPages(ArrayList<Integer> arr, int n, int m) {
+        if(n<m){
+            return -1;
+        }
+        int ans=-1;
+        int low=Collections.max(arr);
+         int sum = 0;
+        for(int i = 0; i<arr.size(); i++){
+            sum+=arr.get(i);
+        }
+        int high=sum;
+        while(low<=high){
+            int mid=(low+high)/2;
+
+            if(isPossible(arr,mid,m)){
+                ans=mid;
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+
+        }
+        return ans;
+    }
+}
