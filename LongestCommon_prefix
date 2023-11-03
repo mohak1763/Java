@@ -1,0 +1,25 @@
+import java.util.*;
+
+import com.sun.net.httpserver.Authenticator.Result;
+public class Solution {
+    public static String commonPrefix(String []arr,int n){
+        StringBuilder result= new StringBuilder();
+        Arrays.sort(arr);
+        char[] first=arr[0].toCharArray();
+        char[] last=arr[arr.length-1].toCharArray();
+        
+
+        for(int i=0;i<first.length;i++){
+            if(first[i]!=last[i]){
+                break;
+
+            }
+            result.append(first[i]);
+        }
+        if(result.length()==0){
+            return "-1";
+        }
+        return result.toString();
+        //Write your code here
+    }
+}
