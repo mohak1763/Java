@@ -1,0 +1,42 @@
+import java.util.*;
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if(strs==null || strs.length==0){
+            return new ArrayList<>();
+        }
+        
+        HashMap<String,List<String>> frequency= new HashMap<>();
+        for(String str : strs){
+
+            String s=mapping(str);
+            if(frequency.containsKey(s)){
+                frequency.get(s).add(str);
+
+            }
+            else{
+                List<String> st= new ArrayList<>();
+                st.add(str);
+                frequency.put(s,st);
+
+            }
+
+        }
+        return new ArrayList<>(frequency.values());
+    }
+    private String mapping(String str){
+        int arr[]=new int [26];
+        for(char c : str.toCharArray()){
+            arr[c-'a']++;
+
+        }
+        StringBuilder z= new StringBuilder("");
+        char p='a';
+        for(int count : arr){
+            z.append(p);
+            z.append(count);
+            p++;
+        }
+        return z.toString();
+
+    }
+}
